@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcrição do Ticket #19c5772a</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.breadcrumb {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+}
+
+.breadcrumb a {
+    color: #667eea;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+main {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.transcript {
+    margin: 20px 0;
+    padding: 20px;
+    border-left: 4px solid #667eea;
+    background: #f8f9ff;
+    border-radius: 5px;
+}
+
+.transcript-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #667eea;
+}
+
+.transcript-id {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.transcript-date {
+    font-size: 0.9em;
+    color: #999;
+}
+
+.message {
+    margin: 15px 0;
+    padding: 12px;
+    background: white;
+    border-radius: 5px;
+    border-left: 3px solid #764ba2;
+}
+
+.message-author {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.message-time {
+    color: #999;
+    font-size: 0.85em;
+}
+
+.message-content {
+    margin-top: 8px;
+    color: #333;
+    word-wrap: break-word;
+}
+
+.message-attachment {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.transcript-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.transcript-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transcript-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+}
+
+.transcript-card a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.transcript-card a:hover {
+    text-decoration: underline;
+}
+
+.card-date {
+    color: #999;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card-messages {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.card-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #667eea;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8em;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .transcript-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .transcript-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎫 Transcrição do Ticket #19c5772a</h1>
+            <p>Visualização do histórico de conversa</p>
+            <div class="breadcrumb">
+                <a href="index.html">← Voltar para índice</a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Total de Mensagens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">16/03/2026 03:40:40</div>
+                    <div class="stat-label">Data de Criação</div>
+                </div>
+            </div>
+            
+            <div class="transcript">
+                <div class="transcript-header">
+                    <div class="transcript-id">#19c5772a</div>
+                    <div class="transcript-date">16/03/2026 03:40:40</div>
+                </div>
+                
+                
+        <div class="message">
+            <div class="message-author">777ian</div>
+            <div class="message-time">[16/03 03:40:37]</div>
+            <div class="message-content">
+oi</div>
+            
+        </div>
+        
+        <div class="message">
+            <div class="message-author">777ian</div>
+            <div class="message-time">[16/03 03:40:38]</div>
+            <div class="message-content">
+bão</div>
+            
+        </div>
+        
+            </div>
+        </main>
+        
+        <footer>
+            <p>📊 Página gerada automaticamente pelo Bot de Tickets</p>
+            <p><a href="https://github.com/iccommercedigital-art/transcripts">Repositório GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
