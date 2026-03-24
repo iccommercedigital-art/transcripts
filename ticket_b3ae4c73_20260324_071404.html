@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcrição do Ticket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #36393f;
+            color: #dcddde;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #2c2f33;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border-left: 4px solid #7289da;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            font-size: 13px;
+            color: #99aab5;
+        }
+        
+        .header-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header-info-label {
+            color: #72767d;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .messages-container {
+            background-color: #2c2f33;
+            border-radius: 4px;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .message-group {
+            padding: 0 15px;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .message-avatar {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #7289da;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 16px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .message-content {
+            flex-grow: 1;
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+        
+        .message-author {
+            color: #ffffff;
+            font-weight: 600;
+            word-break: break-word;
+        }
+        
+        .message-timestamp {
+            color: #72767d;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        .message-text {
+            color: #dcddde;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            margin-bottom: 8px;
+        }
+        
+        .message-attachment {
+            background-color: #292b2f;
+            border: 1px solid #202225;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 8px 0;
+            display: inline-block;
+            color: #99aab5;
+            font-size: 12px;
+        }
+        
+        .message-image {
+            margin: 8px 0;
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .message-image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 8px;
+            margin: 8px 0;
+        }
+        
+        .message-image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .message-image-gallery img:hover {
+            transform: scale(1.02);
+        }
+        
+        .message-embed {
+            background-color: #2c2f33;
+            border-left: 4px solid #7289da;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 8px 0;
+            max-width: 500px;
+        }
+        
+        .embed-title {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .embed-description {
+            color: #dcddde;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        
+        .embed-image {
+            margin: 8px 0;
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .embed-field {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .embed-field-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .embed-field-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        
+        .embed-field-value {
+            color: #dcddde;
+            font-size: 13px;
+        }
+        
+        .footer {
+            background-color: #2c2f33;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            text-align: center;
+            color: #72767d;
+            font-size: 12px;
+        }
+        
+        .system-message {
+            color: #72767d;
+            font-style: italic;
+            padding: 0 15px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎫 Transcrição do Ticket</h1>
+            <div class="header-info">
+                <div class="header-info-item">
+                    <span class="header-info-label">ID do Ticket</span>
+                    <span>#b3ae4c73</span>
+                </div>
+                <div class="header-info-item">
+                    <span class="header-info-label">Canal</span>
+                    <span>#ticket-b3ae4c73</span>
+                </div>
+                <div class="header-info-item">
+                    <span class="header-info-label">Data de Geração</span>
+                    <span>24/03/2026 07:14:04</span>
+                </div>
+                <div class="header-info-item">
+                    <span class="header-info-label">Total de Mensagens</span>
+                    <span>12</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="messages-container">
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:11:43</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-embed">
+                        <div class="embed-title">🎫 Suporte</div>
+                        <div class="embed-description">Bem-vindo! Estamos aqui para ajudar.</div>
+                        <div class="embed-field">
+                            <div class="embed-field-item">
+                                <span class="embed-field-name">📝 Como proceder:</span>
+                                <span class="embed-field-value">**1️⃣ Fale suas dúvidas de forma clara e objetiva**
+• Descreva o que está precisando
+• Seja específico e conciso
+• Compartilhe detalhes relevantes
+
+**2️⃣ Aguarde nossa resposta**
+• Nosso atendimento analisará sua solicitação
+• Responderemos em breve com a melhor solução
+• Sinta-se à vontade para fazer acompanhamentos</span>
+                            </div>
+                            <div class="embed-field-item">
+                                <span class="embed-field-name">⏱️ Tempo de Resposta:</span>
+                                <span class="embed-field-value">Normalmente respondemos em poucos minutos. Obrigado pela paciência!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-embed">
+                        <div class="embed-title">Motivo de abertura</div>
+                        <div class="embed-description">```
+Blablabla
+```</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:11:49</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-text">Olá! Respondendo à sua dúvida: [Resposta à pergunta do cliente].
+
+Se você quiser ver qual SUP está online, é só digitar "!status". Os downloads dos painéis estão no fim do servidor.
+
+Caso precise de mais ajuda ou suporte, pode me avisar. &lt;@&amp;1396122908870443079&gt; &lt;@&amp;1447692804582014996&gt; (se for necessário suporte humano)</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:12:02</span>
+                    </div>
+                    <div class="message-text">Salve</div>
+                </div>
+            </div>
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:12:11</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-text">Olá! Respondendo à sua dúvida: [Resposta à pergunta do cliente].
+
+Se você quiser ver qual SUP está online, é só digitar "!status". Os downloads dos painéis estão no fim do servidor.
+
+Caso precise de mais ajuda ou suporte, pode me avisar.</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:12:33</span>
+                    </div>
+                    <div class="message-text">Quero saber como instala o painel ios safe android</div>
+                </div>
+            </div>
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:12:42</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-text">Olá! Respondendo à sua dúvida: O painel iOS Safe é exclusivo para dispositivos iOS, não existe versão para Android.
+
+Se você quiser ver qual SUP está online, é só digitar "!status". Os downloads dos painéis estão no fim do servidor.
+
+Caso precise de mais ajuda ou suporte, pode me avisar.</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:12:54</span>
+                    </div>
+                    <div class="message-text">É o ios eu errei</div>
+                </div>
+            </div>
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:13:03</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-text">Olá! Respondendo à sua dúvida: O iOS Safe precisa do GBox para ser instalado. Se estiver fechando sem conseguir abrir, pode ser que o servidor esteja em manutenção.
+
+Se você quiser ver qual SUP está online, é só digitar "!status". Os downloads dos painéis estão no fim do servidor.
+
+Caso precise de mais ajuda ou suporte, pode me avisar.</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:13:21</span>
+                    </div>
+                    <div class="message-text">!status</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:13:32</span>
+                    </div>
+                    <div class="message-text">Qual foi do bglh bot</div>
+                </div>
+            </div>
+            <div class="message-group" style="">
+                <div class="message-avatar"><img src="https://cdn.discordapp.com/avatars/1141693736099786793/a7db38e4691054f5b278f9c2e2c19237.png?size=1024" alt="zblack171kk"></div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">zblack171kk</span>
+                        <span class="message-timestamp">24/03/2026 07:13:36</span>
+                    </div>
+                    <div class="message-text">Me passando informações errada</div>
+                </div>
+            </div>
+            <div class="message-group" style="opacity: 0.8;">
+                <div class="message-avatar" style="background-color: #43b581;">T</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">teste tickets 2</span>
+                        <span class="message-timestamp">24/03/2026 07:13:45</span>
+                        <span style="background-color: #7289da; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600;">BOT</span>
+                    </div>
+                    <div class="message-text">Olá! Desculpe pela informação incorreta anterior. Poderia detalhar qual informação está errada para que eu possa te ajudar da melhor forma?</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>💾 Transcrição gerada automaticamente | 🔒 Arquivo protegido e arquivado | 🖼️ Inclui imagens de perfil e anexos</p>
+        </div>
+    </div>
+</body>
+</html>
